@@ -12,7 +12,7 @@ def entropy(message):
     Calculates the entropy in a message, and returns the value of the entropy.
 
     """
-    message = message.lower().strip()
+    message = message.lower()
     message = message.replace(" ", "")  # Remove spaces so that they are not counted
     h_ent = 0  # Initiate an entropy value
     n_length = len(message)  # Calculate the length of the message
