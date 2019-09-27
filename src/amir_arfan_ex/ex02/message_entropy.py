@@ -13,7 +13,8 @@ def entropy(message):
 
     """
     message = message.lower()
-    message = message.replace(" ", "")  # Remove spaces so that they are not counted
+    message = message.replace(" ", "")
+    # Remove spaces so that they are not counted
     h_ent = 0  # Initiate an entropy value
     n_length = len(message)  # Calculate the length of the message
     n_freq = letter_freq(message)  # Use the letter_freq function
