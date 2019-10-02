@@ -45,3 +45,14 @@ def test_median_of_different_inputs():
 
     unordered_data = [3, 2, 4, 1, 5]
     assert median(unordered_data) == 3
+
+
+def test_median_raises_value_error_on_empty_list():
+    try:
+        median([])
+    except ValueError:
+        pass
+    else:
+        assert False
+
+
