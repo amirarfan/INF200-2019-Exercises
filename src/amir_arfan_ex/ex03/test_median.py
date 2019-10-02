@@ -23,8 +23,8 @@ def median(data):
         raise ValueError
     else:
         return (
-            (sorted_data[(num_elements // 2) - 1] + sorted_data[
-            num_elements // 2]) / 2
+                (sorted_data[(num_elements // 2) - 1] + sorted_data[
+                    num_elements // 2]) / 2
         )
 
 
@@ -58,3 +58,7 @@ def test_median_raises_value_error_on_empty_list():
         assert False
 
 
+def test_median_is_not_original():
+    data = [3, 2, 4, 1, 5]
+    median_data = median(data)
+    assert data == data
