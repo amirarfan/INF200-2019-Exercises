@@ -62,3 +62,8 @@ def test_median_is_not_original():
     data = [3, 2, 4, 1, 5]
     median_data = median(data)
     assert data == data
+
+def test_median_tuple():
+    tuple_data = {1, 2, 4, 3, 5}
+    assert median(tuple_data) == 3
+
