@@ -21,8 +21,8 @@ def median(data):
         return sorted_data[num_elements // 2]
     else:
         return (
-                sorted_data[num_elements // 2 - 1] + sorted_data[
-            num_elements // 2]
+            (sorted_data[(num_elements // 2) - 1] + sorted_data[
+            num_elements // 2]) / 2
         )
 
 
@@ -37,10 +37,10 @@ def test_median_of_different_inputs():
     even_data = [4, 6, 7, 9]
     assert median(even_data) == 6.5
 
-    ordered_data = [4,5,6,7,9]
+    ordered_data = [4, 5, 6, 7, 9]
     assert median(ordered_data) == 6
 
-    reverse_ordered_data = [9,7,6,5,4]
+    reverse_ordered_data = [9, 7, 6, 5, 4]
     assert median(reverse_ordered_data) == 6
 
     unordered_data = [3, 2, 4, 1, 5]
