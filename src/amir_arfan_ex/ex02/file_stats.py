@@ -6,9 +6,9 @@ def char_counts(textfilename):
     index value being how many times it occurred
 
     """
-    result = [0 for _ in range(255+1)]
+    result = [0 for _ in range(255 + 1)]
     # Result contains only 0's for computational purposes
-    with open(textfilename, 'r', encoding='utf-8') as my_file:
+    with open(textfilename, "r", encoding="utf-8") as my_file:
         data = my_file.read()
         for char in set(data):
             # Using sets:
@@ -20,18 +20,14 @@ def char_counts(textfilename):
         return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    filename = 'file_stats.py'
+    filename = "file_stats.py"
     frequencies = char_counts(filename)
     for code in range(256):
         if frequencies[code] > 0:
-            character = ''
+            character = ""
             if code >= 32:
                 character = chr(code)
 
-            print(
-                '{:3}{:>4}{:6}'.format(
-                    code, character, frequencies[code]
-                )
-            )
+            print("{:3}{:>4}{:6}".format(code, character, frequencies[code]))
