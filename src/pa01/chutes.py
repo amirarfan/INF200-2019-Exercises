@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-__author__ = ''
-__email__ = '@nmbu.no'
+__author__ = 'Sebastian Tobias Becker'
+__email__ = 'sebabeck@nmbu.no'
