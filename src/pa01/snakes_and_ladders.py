@@ -149,8 +149,30 @@ def multi_game_experiment(num_games, num_players, seed):
     num_moves : list
         List with the number of moves needed in each game.
     """
+    random.seed(seed)
+    start_time = time.time()
+    board = new_board()
+    num_moves_list = []
+    for game in range(num_games):
+        players_and_positions = player_position(num_players)
+        completed_game = False
+        num_moves = 0
+        while not completed_game:
+            num_moves += 1
+            for i in players_and_positions.keys():
+                players_and_positions[i] = new_position(
+                    players_and_positions[i])
+                if players_and_positions[i] in board.keys():
+                    players_and_positions[i] = board[players_and_positions[i]]
+                if winning_state(players_and_positions[i]):
+                    num_moves_list.append(num_moves)
+                    completed_game = True
+    end_time = time.time()
+    final_time = (end_time - start_time)
+
+    return num_moves_list, final_time
 
 
 if __name__ == '__main__':
-    test, time = multiple_games(10, 10)
+    test, time = multi_game_experiment(10, 10, 2)
     print(f'The steps takens were {test} and the time taken was {time:2f}')
