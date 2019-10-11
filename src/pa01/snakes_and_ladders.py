@@ -80,7 +80,8 @@ def single_game(num_players):
     while winning_state == False:
         for i in players_and_positions.keys():
             players_and_positions[i] = new_position(players_and_positions[i])
-            
+            if players_and_positions[i] in board.keys():
+                players_and_positions[i]=board[players_and_positions[i]]
 
 
 
