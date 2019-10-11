@@ -47,7 +47,8 @@ def new_position(position):
 
 
 def player_position(num_players):
-    return {"Player"+str(k):0 for k in range(1,num_players+1)}
+    return {"Player" + str(k): 0 for k in range(1, num_players + 1)}
+
 
 def winning_state(position):
     """
@@ -73,18 +74,23 @@ def single_game(num_players):
     num_moves : int
         Number of moves the winning player needed to reach the goal
     """
-    winning_state = False
+    start_time = time.time()
+    completed_game = False
     board = new_board()
     players_and_positions = player_position(num_players)
-
-    while winning_state == False:
+    num_moves = 0
+    while not completed_game:
+        num_moves += 1
         for i in players_and_positions.keys():
             players_and_positions[i] = new_position(players_and_positions[i])
             if players_and_positions[i] in board.keys():
-                players_and_positions[i]=board[players_and_positions[i]]
+                players_and_positions[i] = board[players_and_positions[i]]
+            if winning_state(players_and_positions[i]):
+                completed_game = True
+    end_time = time.time()
+    final_time = (end_time - start_time)
 
-
-
+    return num_moves, final_time
 
 
 def multiple_games(num_games, num_players):
@@ -101,7 +107,7 @@ def multiple_games(num_games, num_players):
     Returns
     -------
     num_moves : list
-        List with the numbedr of moves needed in each game.
+        List with the number of moves needed in each game.
     """
 
 
@@ -123,3 +129,8 @@ def multi_game_experiment(num_games, num_players, seed):
     num_moves : list
         List with the number of moves needed in each game.
     """
+
+
+if __name__ == '__main__':
+    test, time = single_game(100)
+    print(f'The steps takens were {test} and the time taken was {time:2f}')
