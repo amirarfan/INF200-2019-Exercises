@@ -26,6 +26,10 @@ def board():
     }
     return snakes_and_laders
 
+
+def dice():
+    return random.randint(1,6)
+
 def single_game(num_players):
     """
     Returns duration of single game.
