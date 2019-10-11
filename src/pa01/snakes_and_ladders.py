@@ -46,6 +46,9 @@ def new_position(position):
     return position
 
 
+def player_position(num_players):
+    player_position_dict={"Player"+str(k):0 for k in range(1,num_players+1)}
+
 def winning_state(position):
     """
     Checks if a player has won
@@ -70,6 +73,15 @@ def single_game(num_players):
     num_moves : int
         Number of moves the winning player needed to reach the goal
     """
+    winning_state = False
+    board = board()
+
+    for i in range(num_players)
+        return position
+
+    while winning_state == False
+
+
 
 
 def multiple_games(num_games, num_players):
