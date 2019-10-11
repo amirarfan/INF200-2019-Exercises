@@ -3,6 +3,9 @@
 __author__ = 'Sebastian Tobias Becker, Amir Inaamullah Arfan'
 __email__ = 'sebabeck@nmbu.no, amar@nmbu.no'
 
+import random
+import time
+from matplotlib import pyplot as plt
 
 def single_game(num_players):
     """
