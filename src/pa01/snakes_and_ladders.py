@@ -8,7 +8,7 @@ import time
 from matplotlib import pyplot as plt
 
 
-def board():
+def new_board():
     """
     Returns a board consisting of both snakes and ladder positions
     """
@@ -47,7 +47,7 @@ def new_position(position):
 
 
 def player_position(num_players):
-    player_position_dict={"Player"+str(k):0 for k in range(1,num_players+1)}
+    return {"Player"+str(k):0 for k in range(1,num_players+1)}
 
 def winning_state(position):
     """
@@ -74,12 +74,14 @@ def single_game(num_players):
         Number of moves the winning player needed to reach the goal
     """
     winning_state = False
-    board = board()
+    board = new_board()
+    players_and_positions = player_position(num_players)
 
-    for i in range(num_players)
-        return position
+    while winning_state == False:
+        for i in players_and_positions.keys():
+            players_and_positions[i] = new_position(players_and_positions[i])
+            
 
-    while winning_state == False
 
 
 
@@ -118,5 +120,5 @@ def multi_game_experiment(num_games, num_players, seed):
     Returns
     -------
     num_moves : list
-        List with the numbedr of moves needed in each game.
+        List with the number of moves needed in each game.
     """
