@@ -32,6 +32,11 @@ def dice():
     return random.randint(1, 6)
 
 
+def new_position(position):
+    position+= dice()
+    return position
+
+
 def winning_state(position):
     if position >= 90:
         return True
