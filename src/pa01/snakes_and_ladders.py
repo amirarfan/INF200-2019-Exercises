@@ -7,28 +7,37 @@ import random
 import time
 from matplotlib import pyplot as plt
 
+
 def board():
-    snakes_and_laders={
-        1:40,
-        8:10,
-        36:52,
-        43:62,
-        49:79,
-        65:82,
-        68:85,
-        24:5,
-        33:3,
-        42:30,
-        56:37,
-        64:27,
-        74:12,
-        87:70
+    snakes_and_laders = {
+        1: 40,
+        8: 10,
+        36: 52,
+        43: 62,
+        49: 79,
+        65: 82,
+        68: 85,
+        24: 5,
+        33: 3,
+        42: 30,
+        56: 37,
+        64: 27,
+        74: 12,
+        87: 70
     }
     return snakes_and_laders
 
 
 def dice():
-    return random.randint(1,6)
+    return random.randint(1, 6)
+
+
+def winning_state(position):
+    if position >= 90:
+        return True
+    else:
+        pass
+
 
 def single_game(num_players):
     """
