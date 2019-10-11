@@ -9,7 +9,10 @@ from matplotlib import pyplot as plt
 
 
 def board():
-    snakes_and_laders = {
+    """
+    Returns a board consisting of both snakes and ladder positions
+    """
+    snakes_and_ladders = {
         1: 40,
         8: 10,
         36: 52,
@@ -25,19 +28,28 @@ def board():
         74: 12,
         87: 70
     }
-    return snakes_and_laders
+    return snakes_and_ladders
 
 
 def dice():
+    """
+    Returns a value between 1 and 6. Simulates a dice throw.
+    """
     return random.randint(1, 6)
 
 
 def new_position(position):
-    position+= dice()
+    """
+    Returns new position of the player using the dice function.
+    """
+    position += dice()
     return position
 
 
 def winning_state(position):
+    """
+    Checks if a player has won
+    """
     if position >= 90:
         return True
     else:
