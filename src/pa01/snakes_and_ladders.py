@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-__author__ = 'Sebastian Tobias Becker, Amir Inaamullah Arfan'
-__email__ = 'sebabeck@nmbu.no, amar@nmbu.no'
+__author__ = "Sebastian Tobias Becker, Amir Inaamullah Arfan"
+__email__ = "sebabeck@nmbu.no, amar@nmbu.no"
 
 import random
 import time
-from matplotlib import pyplot as plt
+import numpy as np
 
 
 def new_board():
@@ -26,7 +26,7 @@ def new_board():
         56: 37,
         64: 27,
         74: 12,
-        87: 70
+        87: 70,
     }
     return snakes_and_ladders
 
@@ -74,11 +74,11 @@ def single_game(num_players):
     num_moves : int
         Number of moves the winning player needed to reach the goal
     """
-    start_time = time.time()
     completed_game = False
     board = new_board()
     players_and_positions = player_position(num_players)
     num_moves = 0
+    start_time = time.time()
     while not completed_game:
         num_moves += 1
         for i in players_and_positions.keys():
@@ -87,8 +87,7 @@ def single_game(num_players):
                 players_and_positions[i] = board[players_and_positions[i]]
             if winning_state(players_and_positions[i]):
                 completed_game = True
-    end_time = time.time()
-    final_time = (end_time - start_time)
+    final_time = time.time() - start_time
 
     return num_moves, final_time
 
@@ -109,26 +108,29 @@ def multiple_games(num_games, num_players):
     num_moves : list
         List with the number of moves needed in each game.
     """
-    start_time = time.time()
+
     board = new_board()
     num_moves_list = []
+    duration_list = []
     for game in range(num_games):
         players_and_positions = player_position(num_players)
         completed_game = False
         num_moves = 0
+        start_time = time.time()
         while not completed_game:
             num_moves += 1
             for i in players_and_positions.keys():
-                players_and_positions[i] = new_position(players_and_positions[i])
+                players_and_positions[i] = new_position(
+                    players_and_positions[i]
+                )
                 if players_and_positions[i] in board.keys():
                     players_and_positions[i] = board[players_and_positions[i]]
                 if winning_state(players_and_positions[i]):
                     num_moves_list.append(num_moves)
                     completed_game = True
-    end_time = time.time()
-    final_time = (end_time - start_time)
+                    duration_list.append(time.time() - start_time)
 
-    return num_moves_list, final_time
+    return num_moves_list, duration_list
 
 
 def multi_game_experiment(num_games, num_players, seed):
@@ -150,29 +152,21 @@ def multi_game_experiment(num_games, num_players, seed):
         List with the number of moves needed in each game.
     """
     random.seed(seed)
-    start_time = time.time()
-    board = new_board()
-    num_moves_list = []
-    for game in range(num_games):
-        players_and_positions = player_position(num_players)
-        completed_game = False
-        num_moves = 0
-        while not completed_game:
-            num_moves += 1
-            for i in players_and_positions.keys():
-                players_and_positions[i] = new_position(
-                    players_and_positions[i])
-                if players_and_positions[i] in board.keys():
-                    players_and_positions[i] = board[players_and_positions[i]]
-                if winning_state(players_and_positions[i]):
-                    num_moves_list.append(num_moves)
-                    completed_game = True
-    end_time = time.time()
-    final_time = (end_time - start_time)
-
-    return num_moves_list, final_time
+    num_moves_list, duration_list = multiple_games(num_games, num_players)
+    return num_moves_list, duration_list
 
 
-if __name__ == '__main__':
-    test, time = multi_game_experiment(10, 10, 2)
-    print(f'The steps takens were {test} and the time taken was {time:2f}')
+if __name__ == "__main__":
+    number_of_moves, durations = multi_game_experiment(100, 4, 2)
+    durations.sort()
+    first = durations[0]
+    last = durations[len(durations) - 1]
+    print(
+        f"""
+    The shortest game duration was {first:2f} 
+    The longest game duration was {last:2f}
+    The median game duration was {np.median(durations):2f}
+    The mean game duration was {np.mean(durations):2f} 
+    The standard deviation was {np.std(durations):2f}
+    """
+    )
