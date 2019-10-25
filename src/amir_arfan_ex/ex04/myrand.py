@@ -3,8 +3,6 @@
 __author__ = 'Amir Arfan'
 __email__ = 'amar@nmbu.no'
 
-import pytest
-
 
 class LCGRand:
     def __init__(self, seed):
@@ -32,3 +30,12 @@ class ListRand:
 
         self.current += 1
         return random_number
+
+
+if __name__ == '__main__':
+    rand_class = LCGRand(69)
+    rand_list_class = ListRand([45, 32, 12, 54, 31, 22, 11, 85])
+
+    for times in range(5):
+        print(f'Random number from LCGRand is {rand_class.rand()},'
+              f'Random number from ListRand is {rand_list_class.rand()}')
