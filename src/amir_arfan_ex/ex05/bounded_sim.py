@@ -24,13 +24,12 @@ class BoundedWalker:
         """
 
         if not left_limit <= start <= right_limit:
-            print('Your limits are not correct.')
-            return
+            raise RuntimeError('Your limits are not correct')
         if not left_limit <= home <= right_limit:
             raise RuntimeError('Your limits are not correct')
-            return
 
         self.left_limit = left_limit
         self.right_limit = right_limit
 
         super().__init__(start,home)  # Using the super method as advised to do
+        
