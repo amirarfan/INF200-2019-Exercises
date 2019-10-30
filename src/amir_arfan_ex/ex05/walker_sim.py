@@ -96,7 +96,9 @@ class Simulation:
             List with the number of steps per walk
         """
 
-        list_walks = [self.single_walk() for _ in range(num_walks)]
+        list_walks = []
+        for _ in range(num_walks):
+            list_walks.append(self.single_walk())
 
         return list_walks
 
