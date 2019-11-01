@@ -47,6 +47,8 @@ class BoundedWalker(Walker):
         elif self.current_position > self.right_limit:
             self.current_position = self.right_limit
 
+        #  Enforcing the limits
+
 
 class BoundedSimulation(Simulation):
     def __init__(self, start, home, seed, left_limit, right_limit):
