@@ -3,6 +3,8 @@
 __author__ = 'Amir Arfan, Sebastian Tobias Becker'
 __email__ = 'amar@nmbu.no, sebabeck@nmbu.no'
 
+import random
+
 
 class Board:
     standard_board = {
@@ -38,8 +40,32 @@ class Board:
     def goal_reached(self):
         return self.position >= self.goal
 
-    def position_adjustment(self,positiones):
-        if positiones in self.board:
-           return self.change_position = self.board[positiones]
+    def position_adjustment(self, positiones):
+        if positiones in self.board.keys():
+            self.change_position = self.board[positiones]
         else:
-            return self.change_position = 0
+            self.change_position = 0
+
+        return self.change_position
+
+
+class Player(Board):
+    def __init__(self, board=None):
+        if board is None:
+            self.board = Board()
+        else:
+            self.board = board
+
+        super().__init__(self.position)
+
+    def move(self):
+        self.position += random.randint(1,6)
+
+        if Board.position_adjustment(self.position) == 0:
+            pass
+        else:
+            self.position = Board.position_adjustment(self.position)
+
+
+
+
