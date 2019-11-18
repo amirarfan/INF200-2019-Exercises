@@ -36,8 +36,8 @@ class Board:
 
         self.change_position = 0
 
-    def goal_reached(self):
-        return self.position >= self.goal
+    def goal_reached(self, cur_pos):
+        return cur_pos >= self.goal
 
     def position_adjustment(self, positiones):
         if positiones in self.board.keys():
@@ -48,7 +48,7 @@ class Board:
         return self.change_position
 
 
-class Player(Board):
+class Player:
     def __init__(self, board=None):
         if board is None:
             self.board = Board()
@@ -56,22 +56,42 @@ class Player(Board):
             self.board = board
 
         self.position = 0
+
     def move(self):
-        self.position += random.randint(1,6)
+        self.position += random.randint(1, 6)
 
         if Board.position_adjustment(self.position) == 0:
             pass
         else:
             self.position = Board.position_adjustment(self.position)
+
+
 class ResilientPlayer(Player):
     def __init__(self, extra_steps=1):
         super().__init__(self.board)
-        self.position = 0
         self.extra_steps = extra_steps
 
     def move(self):
-        self.position += random.randint(1,6)
+        self.position += random.randint(1, 6)
         if Board.position_adjustment(self.position) == 0:
             pass
-        if self.position > Board.position_adjustment(self.position):
-            self.position = Board.position_adjustment(self.position) + self.extra_steps
+        elif self.position > Board.position_adjustment(self.position):
+            self.position = Board.position_adjustment(
+                self.position) + self.extra_steps
+
+
+class LazyPlayer(Player):
+    def __init__(self, drop_steps=1):
+        super().__init__(self.board)
+        self.drop_steps = drop_steps
+
+    def move(self):
+        self.position += random.randint(1, 6)
+        if Board.position_adjustment(self.position) == 0:
+            pass
+        elif self.position < Board.position_adjustment(self.position):
+            self.position = Board.position_adjustment(
+                self.position) - self.drop_steps
+
+        if self.position < 0:
+            self.position = 0
