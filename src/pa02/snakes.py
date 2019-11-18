@@ -34,7 +34,6 @@ class Board:
         if goal is None:
             self.goal = self.standard_goal
 
-        self.position = 0
         self.change_position = 0
 
     def goal_reached(self):
@@ -56,8 +55,7 @@ class Player(Board):
         else:
             self.board = board
 
-        super().__init__(self.position)
-
+        self.position = 0
     def move(self):
         self.position += random.randint(1,6)
 
@@ -65,7 +63,15 @@ class Player(Board):
             pass
         else:
             self.position = Board.position_adjustment(self.position)
+class ResilientPlayer(Player):
+    def __init__(self, extra_steps=1):
+        super().__init__(self.board)
+        self.position = 0
+        self.extra_steps = extra_steps
 
-
-
-
+    def move(self):
+        self.position += random.randint(1,6)
+        if Board.position_adjustment(self.position) == 0:
+            pass
+        if self.position > Board.position_adjustment(self.position):
+            self.position = Board.position_adjustment(self.position) + self.extra_steps
