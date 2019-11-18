@@ -95,3 +95,21 @@ class LazyPlayer(Player):
 
         if self.position < 0:
             self.position = 0
+class Simulation:
+    def __init__(self, board, seed):
+
+    def single_game(self):
+        pass
+    def run_simulation(self):
+        pass
+    def get_results(self):
+        pass
+    def winners_per_type(self):
+        pass
+    def durations_per_type(self):
+        pass
+    def players_per_type(self):
+        pass
+
+
+
