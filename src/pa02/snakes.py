@@ -33,9 +33,13 @@ class Board:
             self.goal = self.standard_goal
 
         self.position = 0
+        self.change_position = 0
 
     def goal_reached(self):
-        return if self.position >= self.goal
+        return self.position >= self.goal
 
-    def position_adjustment(self):
-        pass
+    def position_adjustment(self,positiones):
+        if positiones in self.board:
+           return self.change_position = self.board[positiones]
+        else:
+            return self.change_position = 0
