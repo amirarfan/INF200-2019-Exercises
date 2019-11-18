@@ -8,4 +8,4 @@ __email__ = 'amar@nmbu.no, sebabeck@nmbu.no'
 
 
 # Mitt navn er Amir
->>>>>>> pa02
+" hello"
