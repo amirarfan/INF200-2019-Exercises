@@ -29,10 +29,10 @@ class Board:
     def __init__(self, ladders_and_snakes=None, goal=None):
 
         if ladders_and_snakes is None:
-            self.board = self.standard_board
+            self.board = Board.standard_board
 
         if goal is None:
-            self.goal = self.standard_goal
+            self.goal = Board.standard_goal
 
         self.change_position = 0
 
@@ -73,10 +73,10 @@ class ResilientPlayer(Player):
 
     def move(self):
         self.position += random.randint(1, 6)
-        if Board.position_adjustment(self.position) == 0:
+        if self.board.position_adjustment(self.position) == 0:
             pass
-        elif self.position > Board.position_adjustment(self.position):
-            self.position = Board.position_adjustment(
+        elif self.position > self.board.position_adjustment(self.position):
+            self.position = self.board.position_adjustment(
                 self.position) + self.extra_steps
 
 
@@ -87,16 +87,26 @@ class LazyPlayer(Player):
 
     def move(self):
         self.position += random.randint(1, 6)
-        if Board.position_adjustment(self.position) == 0:
+        if self.board.position_adjustment(self.position) == 0:
             pass
-        elif self.position < Board.position_adjustment(self.position):
-            self.position = Board.position_adjustment(
+        elif self.position < self.board.position_adjustment(self.position):
+            self.position = self.board.position_adjustment(
                 self.position) - self.drop_steps
 
         if self.position < 0:
             self.position = 0
+
 class Simulation:
-    def __init__(self, board, seed):
+    def __init__(self, player_classes, board=None, seed=69, randomize_players=False):
+        if board is None:
+            self.board = Board()
+        else:
+            self.board = board
+
+        self.player_classes = player_classes
+
+        self.randomtf = randomize_players
+
 
     def single_game(self):
         pass
