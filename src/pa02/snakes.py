@@ -54,7 +54,7 @@ class Player:
             self.board = Board()
         else:
             self.board = board
-
+        # VI må legge til antall trekk
         self.position = 0
 
     def move(self):
