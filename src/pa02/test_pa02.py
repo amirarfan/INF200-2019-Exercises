@@ -23,6 +23,7 @@ def test_winner_get_result():
 
 def test_amount_of_winners_single_game():
     sim = sa.Simulation([sa.LazyPlayer, sa.Player, sa.ResilientPlayer])
-    sim.single_game()
+    sim.run_simulation(1)
     assert not (len(sim.get_results()) == 2)  # Tests that there is only one
     # winner per game
+    assert (len(sim.get_results()) == 1)
