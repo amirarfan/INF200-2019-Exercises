@@ -114,8 +114,12 @@ class Simulation:
 
 
     def single_game(self):
-        for i in self.player_classes:
-            i.move
+        players = [player(self.board) for player in self.player_classes]
+        while True:
+            for in players:
+                .move()
+            
+
     def run_simulation(self):
         pass
     def get_results(self):
