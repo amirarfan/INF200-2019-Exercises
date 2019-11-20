@@ -113,7 +113,7 @@ class Simulation:
         self.randomtf = randomize_players
 
         random.seed(seed)
-        self.res_simulation=[]
+        self.res_simulation = []
 
     def single_game(self):
 
@@ -131,18 +131,18 @@ class Simulation:
         for simulation in range(number_of_simulation):
             self.res_simulation.append(self.single_game())
 
-
     def get_results(self):
-        pass
+        return self.res_simulation
 
     def winners_per_type(self):
-        pass
+        
 
     def durations_per_type(self):
         pass
 
     def players_per_type(self):
         pass
+
 
 if __name__ == "__main__":
     player_classes = ['LazyPlayer']
