@@ -54,7 +54,7 @@ class Player:
             self.board = Board()
         else:
             self.board = board
-        self.num_moves =0
+        self.num_moves = 0
         self.position = 0
 
     def move(self):
@@ -82,7 +82,6 @@ class ResilientPlayer(Player):
         self.num_moves += 1
 
 
-
 class LazyPlayer(Player):
     def __init__(self, board, drop_steps=1):
         super().__init__(board)
@@ -102,7 +101,8 @@ class LazyPlayer(Player):
 
 
 class Simulation:
-    def __init__(self, player_classes, board=None, seed=69, randomize_players=False):
+    def __init__(self, player_classes, board=None, seed=69,
+                 randomize_players=False):
         if board is None:
             self.board = Board()
         else:
@@ -112,27 +112,36 @@ class Simulation:
 
         self.randomtf = randomize_players
 
+        random.seed(seed)
 
     def single_game(self):
-        players = [player(self.board) for player in self.player_classes]
-        while True:
-            for i in players:
-                i.move()
-                if goal_reached:
-                    return type(i).__name__ , num_moves
 
-            
+        if self.randomtf:
+            random.shuffle(self.player_classes)
+
+        players = [eval(player)(self.board) for player in self.player_classes]
+        while True:
+            for player in players:
+                player.move()
+                if self.board.goal_reached(player.position):
+                    return player.num_moves, type(player).__name__
 
     def run_simulation(self):
         pass
+
     def get_results(self):
         pass
+
     def winners_per_type(self):
         pass
+
     def durations_per_type(self):
         pass
+
     def players_per_type(self):
         pass
 
-
-
+if __name__ == "__main__":
+    player_classes = ['LazyPlayer']
+    sim = Simulation(player_classes)
+    print(sim.single_game())
