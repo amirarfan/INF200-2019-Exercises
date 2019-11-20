@@ -115,7 +115,8 @@ class Simulation:
         random.seed(seed)
         self.res_simulation = []
 
-        self.types_of_players = ['ResilientPlayer', 'LazyPlayer', 'Player']
+        self.types_of_players = [type_player for type_player
+                                 in player_classes]
 
     def single_game(self):
 
@@ -145,14 +146,15 @@ class Simulation:
 
         return winner_dict
 
-
     def durations_per_type(self):
-        duration_dict = {i: 0 for i in self.types_of_players}
-        for z in self.res_simulation:
-            if z(1) in duration_dict.keys():
-                duration_dict[z(1)] = [z(0)]
+        duration_dict = {type_player: 0 for type_player in
+                         self.types_of_players}
+        for type_player in duration_dict.keys():
+            duration_dict[type_player] = [duration for duration, player in
+                                          self.res_simulation
+                                          if type_player == player]
 
-
+        return duration_dict
 
     def players_per_type(self):
         pass
@@ -161,5 +163,6 @@ class Simulation:
 if __name__ == "__main__":
     player_classes = ['LazyPlayer', 'Player', 'ResilientPlayer']
     sim = Simulation(player_classes)
-    (sim.run_simulation(10))
+    sim.run_simulation(10)
     print(sim.winners_per_type())
+    print(sim.durations_per_type())
