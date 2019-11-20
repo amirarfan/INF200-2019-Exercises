@@ -60,10 +60,10 @@ class Player:
     def move(self):
         self.position += random.randint(1, 6)
 
-        if Board.position_adjustment(self.position) == 0:
+        if self.board.position_adjustment(self.position) == 0:
             pass
         else:
-            self.position = Board.position_adjustment(self.position)
+            self.position = self.board.position_adjustment(self.position)
         self.num_moves += 1
 
 
@@ -115,6 +115,8 @@ class Simulation:
         random.seed(seed)
         self.res_simulation = []
 
+        self.types_of_players = ['ResilientPlayer', 'LazyPlayer', 'Player']
+
     def single_game(self):
 
         if self.randomtf:
@@ -135,10 +137,11 @@ class Simulation:
         return self.res_simulation
 
     def winners_per_type(self):
-        winner_dict = {player: 0 for player in self.player_classes}
-        for player in self.player_classes:
-            num = self.res_simulation.count(player)
-            winner_dict[player] = num
+        winners = list(zip(*self.res_simulation))
+
+        winner_dict = {player: winners[1].count(player) for player
+                       in self.types_of_players}
+
         return winner_dict
 
 
@@ -150,7 +153,7 @@ class Simulation:
 
 
 if __name__ == "__main__":
-    player_classes = ['LazyPlayer']
+    player_classes = ['LazyPlayer', 'Player', 'ResilientPlayer']
     sim = Simulation(player_classes)
-    print(sim.single_game())
+    print(sim.run_simulation(10))
     print(sim.winners_per_type())
