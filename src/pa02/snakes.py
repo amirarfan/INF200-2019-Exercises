@@ -54,7 +54,7 @@ class Player:
             self.board = Board()
         else:
             self.board = board
-        # VI må legge til antall trekk
+        self.num_moves =0
         self.position = 0
 
     def move(self):
@@ -64,6 +64,7 @@ class Player:
             pass
         else:
             self.position = Board.position_adjustment(self.position)
+        self.num_moves += 1
 
 
 class ResilientPlayer(Player):
@@ -78,6 +79,8 @@ class ResilientPlayer(Player):
         elif self.position > self.board.position_adjustment(self.position):
             self.position = self.board.position_adjustment(
                 self.position) + self.extra_steps
+        self.num_moves += 1
+
 
 
 class LazyPlayer(Player):
@@ -95,6 +98,8 @@ class LazyPlayer(Player):
 
         if self.position < 0:
             self.position = 0
+        self.num_moves += 1
+
 
 class Simulation:
     def __init__(self, player_classes, board=None, seed=69, randomize_players=False):
