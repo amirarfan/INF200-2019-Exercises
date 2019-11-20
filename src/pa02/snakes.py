@@ -114,7 +114,8 @@ class Simulation:
 
 
     def single_game(self):
-        pass
+        for i in self.player_classes:
+            i.move
     def run_simulation(self):
         pass
     def get_results(self):
