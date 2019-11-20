@@ -113,6 +113,7 @@ class Simulation:
         self.randomtf = randomize_players
 
         random.seed(seed)
+        self.res_simulation=[]
 
     def single_game(self):
 
@@ -126,8 +127,10 @@ class Simulation:
                 if self.board.goal_reached(player.position):
                     return player.num_moves, type(player).__name__
 
-    def run_simulation(self):
-        pass
+    def run_simulation(self, number_of_simulation):
+        for simulation in range(number_of_simulation):
+            self.res_simulation.append(self.single_game())
+
 
     def get_results(self):
         pass
