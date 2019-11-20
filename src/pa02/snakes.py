@@ -156,8 +156,10 @@ class Simulation:
         return duration_dict
 
     def players_per_type(self):
-
-        pass
+        players_dict={players: 0 for players in self.player_classes}
+        for i in self.player_classes:
+            players_dict[i] += 1
+        return players_dict
 
 
 if __name__ == "__main__":
