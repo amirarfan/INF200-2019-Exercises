@@ -23,12 +23,12 @@ class TestBoard:
 
     def test_constructor_args(self):
         """Constructor with unnamed arguments callable."""
-        b = cs.Board([(1, 4), (5, 16)], [(9, 2), (12, 3)], 90)
+        b = cs.Board({1:4, 5:16, 9:2, 12:3}, 90)
         assert isinstance(b, cs.Board)
 
     def test_constructor_named_args(self):
         """Constructor with kw args callable."""
-        b = cs.Board(ladders=[(1, 4), (5, 16)], chutes=[(9, 2), (12, 3)], goal=90)
+        b = cs.Board(snakes_and_ladders={1:4, 5:16, 9:2, 12:3}, goal=90)
         assert isinstance(b, cs.Board)
 
     def test_goal_reached(self):
