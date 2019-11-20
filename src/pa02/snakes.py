@@ -135,7 +135,12 @@ class Simulation:
         return self.res_simulation
 
     def winners_per_type(self):
-        
+        winner_dict = {player: 0 for player in self.player_classes}
+        for player in self.player_classes:
+            num = self.res_simulation.count(player)
+            winner_dict[player] = num
+        return winner_dict
+
 
     def durations_per_type(self):
         pass
@@ -148,3 +153,4 @@ if __name__ == "__main__":
     player_classes = ['LazyPlayer']
     sim = Simulation(player_classes)
     print(sim.single_game())
+    print(sim.winners_per_type())
