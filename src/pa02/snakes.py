@@ -39,13 +39,11 @@ class Board:
     def goal_reached(self, cur_pos):
         return cur_pos >= self.goal
 
-    def position_adjustment(self, positiones):
-        if positiones in self.board.keys():
-            self.change_position = self.board[positiones]
+    def position_adjustment(self, cur_pos):
+        if cur_pos in self.board.keys():
+            self.change_position = self.board[cur_pos]
         else:
             self.change_position = 0
-
-        return self.change_position
 
 
 class Player:
@@ -79,6 +77,7 @@ class ResilientPlayer(Player):
         elif self.position > self.board.position_adjustment(self.position):
             self.position = self.board.position_adjustment(
                 self.position) + self.extra_steps
+
         self.num_moves += 1
 
 
@@ -157,6 +156,7 @@ class Simulation:
         return duration_dict
 
     def players_per_type(self):
+
         pass
 
 
