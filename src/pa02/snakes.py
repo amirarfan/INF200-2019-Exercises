@@ -137,6 +137,7 @@ class Simulation:
         return self.res_simulation
 
     def winners_per_type(self):
+<<<<<<< Updated upstream
         winners = list(zip(*self.res_simulation))
 
         winner_dict = {player: winners[1].count(player) for player
@@ -144,6 +145,17 @@ class Simulation:
 
         return winner_dict
 
+=======
+        dicte = {player: 0 for player in self.player_classes}
+        for i in self.get_results():
+            if i in dicte.keys():
+                dicte[i] += 1
+        return dicte
+
+
+
+        
+>>>>>>> Stashed changes
 
     def durations_per_type(self):
         pass
@@ -155,5 +167,9 @@ class Simulation:
 if __name__ == "__main__":
     player_classes = ['LazyPlayer', 'Player', 'ResilientPlayer']
     sim = Simulation(player_classes)
+<<<<<<< Updated upstream
     print(sim.run_simulation(10))
+=======
+    print(sim.single_game())
+>>>>>>> Stashed changes
     print(sim.winners_per_type())
